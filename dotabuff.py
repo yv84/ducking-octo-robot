@@ -6,7 +6,8 @@ import math
 import threading
 
 
-parser = argparse.ArgumentParser(description=' http://dotabuff.com/  ')
+parser = argparse.ArgumentParser(
+                   description=' http://dotabuff.com/ - Played with Me ')
 parser.add_argument("--me", dest='my_players_id', type=int, required=True,
                    help='Id dotabuff')
 parser.add_argument("--fp", dest='start_page', type=int, required=False,
