@@ -19,7 +19,7 @@ parser.add_argument("--file", dest='outfile', type=str, required=False,
                    default='dotabuff.txt', help='save/load data from file')
 parser.add_argument("--tp", dest='target_players', type=str, required=True,
                    help='list matching players')
-parser.add_argument("--thr", dest='thread_count', type=int, required=True,
+parser.add_argument("--thr", dest='thread_count', type=int, required=False,
                    default=1, help='threads count')
 args = parser.parse_args()
 my_players_id = args.my_players_id
