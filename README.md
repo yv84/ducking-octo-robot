@@ -7,7 +7,7 @@ usage: dotabuff.py [-h] --me MY_PLAYERS_ID [--fp START_PAGE] [--lp END_PAGE]
                    [--reload MODE] [--file OUTFILE] --tp TARGET_PLAYERS
                    [--thr THREAD_COUNT]
 
-http://dotabuff.com/
+http://dotabuff.com/ - Played with Me
 
 optional arguments:
   -h, --help           show this help message and exit
