@@ -21,4 +21,4 @@ optional arguments:
 
 
 
-Example: $python3 dotabuff.py --me 100702042 --fp 1 --lp 60 --tp "100702042 76482434 100702042"
+Example: $python3 dotabuff.py --me 100702042 --fp 1 --lp 60 --tp "100702042 76482434 100702042" --thr 20
