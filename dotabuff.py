@@ -24,6 +24,8 @@ parser.add_argument("--thr", dest='thread_count', type=int, required=False,
                    default=1, help='threads count')
 parser.add_argument("--no-reload-p", dest='reloading_p', action='store_true',
                     help='skip reloading pages')
+parser.add_argument("--verified", dest='verified', action='store_true',
+                    help='played with verified players')
 args = parser.parse_args()
 my_players_id = args.my_players_id
 start_page = args.start_page
@@ -44,6 +46,10 @@ if args.reloading_p:
 else:
     reloading_p = True
 
+if args.verified:
+    verified = True
+else:
+    verified = False
 
 while target_players.find('  ') > 0:
     target_players.replace(' ')
@@ -94,6 +100,17 @@ def get_matchid_from_page(player, list_matches, sheet):
     else:
         for match in list_matches:
             yield match
+
+def get_verified_players():
+    verified_players = set()
+    try:
+        page = urllib.request.urlopen(
+            "http://dotabuff.com/players/verified").read()
+        for i in regex_find(page.decode('latin-1'), re_2):
+            verified_players |= ({int(i[0])})
+    except urllib.error.URLError as e:
+        print(e.reason)
+    return verified_players
 
 def get_match_page(players, list_matches, player, sheet, reloading_m):
     for match_id in get_matchid_from_page(player, list_matches, sheet):
@@ -183,7 +200,12 @@ try:
                 list_all_matches.append(int(match))
 except IOError:
     print('File '+outfile+' doesnt exists.')
-    
+    reloading_p = True
+    reloading_m = True
+
+
+if verified:
+    target_players |= get_verified_players()   
     
 threads = []
 if reloading_p and reloading_m:
@@ -211,7 +233,7 @@ if not reloading_p and not reloading_m:
                     my_players_id, target_players, 0, 1, reloading_m)
     thread.start()
     threads.append(thread)
-print('start task')
+print('run...')
 
 # wait for every thread will done
 for thread in threads:
